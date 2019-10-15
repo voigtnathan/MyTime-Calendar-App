@@ -8,3 +8,9 @@ CREATE TABLE "user" (
     "username" VARCHAR (80) UNIQUE NOT NULL,
     "password" VARCHAR (1000) NOT NULL
 );
+
+CREATE TABLE "user_info" (
+"id" serial primary key,
+"user_id" int references "user"(id),
+"google_mail_id" varchar(120)
+);
