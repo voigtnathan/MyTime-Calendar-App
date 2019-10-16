@@ -18,6 +18,7 @@ import UserPage from '../UserPage/UserPage';
 import MainView from '../MainView/MainView';
 
 import './App.css';
+import AddEvent from '../AddEvent/AddEvent';
 
 class App extends Component {
   componentDidMount () {
@@ -50,11 +51,11 @@ class App extends Component {
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-            {/* <ProtectedRoute
+            <ProtectedRoute
               exact
-              path="/calendar"
-              component={MainView}
-            /> */}
+              path="/addevent"
+              component={AddEvent}
+            />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
