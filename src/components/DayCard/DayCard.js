@@ -5,13 +5,15 @@ class DayCard extends Component {
   state = {
     dateObject : moment()
   }
-  
+  componentDidMount(){
+    this.props.dispatch({type:'FETCH_EVENTS'});
+  }
   render(){
     return(
   
-  <div>
+  <div className="day-card">
     <p>
-     Day Card
+     {JSON.stringify(this.props.reduxStore.events)}
     </p>
   </div>
     )};

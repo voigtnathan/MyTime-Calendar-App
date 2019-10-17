@@ -18,11 +18,11 @@ class MainView extends Component {
   
   <div>
     {/* This will be used to map out the card objects */}
-    {this.weekdayshort.map(day => {
-      return(
+    {/* {this.weekdayshort.map(day => {
+      return( */}
       <DayCard />
-      )
-      })}
+      {/* )
+      })} */}
     <LogOutButton className="log-in" />
     <Link
               to="/addevent"

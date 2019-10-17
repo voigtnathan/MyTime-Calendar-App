@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-class DayCard extends Component {
+class AddEvent extends Component {
     state = {
         eventToAdd: {
             title: '',
             location: '',
             desciption: '',
             date: '',
-            startTime: 0,
-            endTime: 0
+            startTime: '',
+            endTime: ''
         }
+    }
+    componentDidMount(){
+        this.props.dispatch({type: 'FETCH_EVENTS'});
     }
 
     handleChange = (propertyName, event) => {
@@ -25,6 +28,7 @@ class DayCard extends Component {
     handleSubmit = (event) =>{
         event.preventDefault();
         console.log(this.state.eventToAdd);
+        this.props.dispatch({type: 'ADD_NEW_EVENT', payload: this.state.eventToAdd});
     }
 
     render() {
@@ -47,7 +51,7 @@ class DayCard extends Component {
                     <button type='submit'>Submit</button>
                 </form>
                 <br/><br/><br/><br/>
-            {JSON.stringify(this.state.eventToAdd)}
+            <p>{JSON.stringify(this.props.reduxStore.events)}</p>
             </div>
         )
     };
@@ -57,4 +61,4 @@ const mapStateToProps = reduxStore => ({
     reduxStore
 });
 
-export default connect(mapStateToProps)(DayCard);
+export default connect(mapStateToProps)(AddEvent);
