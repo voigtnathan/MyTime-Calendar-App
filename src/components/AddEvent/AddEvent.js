@@ -4,9 +4,10 @@ import moment from 'moment';
 class AddEvent extends Component {
     state = {
         eventToAdd: {
+            userId: this.props.reduxStore.user.id,
             title: '',
             location: '',
-            desciption: '',
+            description: '',
             date: '',
             startTime: '',
             endTime: ''
