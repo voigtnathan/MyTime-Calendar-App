@@ -1,20 +1,27 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
-
+import moment from 'moment';
+import './DayCard.css'
 class DayCard extends Component {
+  state = {
+    dateObject : moment()
+  }
+  componentDidMount(){
+    this.props.dispatch({type:'FETCH_EVENTS'});
+  }
   render(){
     return(
   
-  <div>
-    <p>
-     This is a day card to hold event objects
-    </p>
-    <LogOutButton className="log-in" />
+  <div className="day-card">
+    <h2>Today</h2>
+    <h3>{this.props.reduxStore.events.event_date}</h3>
+     {this.props.reduxStore.events.map(event => {
+      return(
+        <button>{event.event_title} on {event.event_date}</button>
+      )
+      })}
+     
+    
   </div>
     )};
 };
