@@ -7,18 +7,15 @@ import {
 } from 'react-router-dom';
 
 import {connect} from 'react-redux';
-
+//import components
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
 import AboutPage from '../AboutPage/AboutPage';
-
 import MainView from '../MainView/MainView';
-
 import './App.css';
 import AddEvent from '../AddEvent/AddEvent';
+import EditEvent from '../EditEvent/EditEvent';
 
 class App extends Component {
   componentDidMount () {
@@ -49,13 +46,16 @@ class App extends Component {
               path="/home"
               component={MainView}
             />
-            {/* This works the same as the other protected route, except that if the user is logged in,
-            they will see the info page instead. */}
             <ProtectedRoute
               exact
               path="/addevent"
               component={AddEvent}
             />
+            <ProtectedRoute
+              exact
+              path="/event/:id"
+              component={EditEvent}
+              />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
@@ -64,5 +64,8 @@ class App extends Component {
       </Router>
   )}
 }
+const mapStateToProps = reduxStore => ({
+  reduxStore
+});
 
-export default connect()(App);
+export default connect(mapStateToProps)(App);
