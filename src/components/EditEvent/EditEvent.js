@@ -13,27 +13,43 @@ class EditEvent extends Component {
             endTime: ''
         }
     }
-    componentDidMount(){
-        this.props.dispatch({type: 'GET_EVENT_BY_ID', payload: this.props.match.params.id});
-        this.setEventToEdit();
+    componentDidMount() {
+        this.props.dispatch({ type: 'GET_EVENT_BY_ID', payload: this.props.match.params.id });
     }
-    setEventToEdit = () =>{
-        console.log(this.props.reduxStore.singleEvent);
+    componentDidUpdate(preProps) {
+        if (this.props.reduxStore.singleEvent !== preProps.reduxStore.singleEvent) {
+            this.setEventToEdit();
+        }
+    }
+    setEventToEdit = () => {
+        this.props.reduxStore.singleEvent.forEach(event => {
+            this.setState({
+                eventToEdit: {
+                    title: event.event_title,
+                    location: event.event_location,
+                    description: event.event_description,
+                    date: event.event_date,
+                    startTime: event.start_time,
+                    endTime: event.end_time
+
+                }
+            })
+        });
     }
 
     handleChange = (propertyName, event) => {
-        console.log(this.state.eventToAdd);
+        console.log(this.state.eventToEdit);
         this.setState({
-            eventToAdd: {
+            eventToEdit: {
                 ...this.state.eventToEdit,
                 [propertyName]: event.target.value
             }
         })
     }
-    handleSubmit = (event) =>{
+    handleSubmit = (event) => {
         event.preventDefault();
         console.log(this.state.eventToEdit);
-        
+
     }
 
     render() {
@@ -42,21 +58,22 @@ class EditEvent extends Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <label>Title</label><br />
-                    <input onChange={(event) => this.handleChange('title', event)}></input><br />
+                    <input value={this.state.eventToEdit.title} onChange={(event) => this.handleChange('title', event)}></input><br />
                     <label>Location</label><br />
-                    <input onChange={(event) => this.handleChange('location', event)}></input><br />
+                    <input value={this.state.eventToEdit.location} onChange={(event) => this.handleChange('location', event)}></input><br />
                     <label>Description</label><br />
-                    <textarea onChange={(event) => this.handleChange('description', event)}></textarea><br />
+                    <textarea value={this.state.eventToEdit.description} onChange={(event) => this.handleChange('description', event)}></textarea><br />
                     <label>Date mm/dd/yyyy</label><br />
-                    <input onChange={(event) => this.handleChange('date', event)}></input><br />
+                    <input value={this.state.eventToEdit.date} onChange={(event) => this.handleChange('date', event)}></input><br />
                     <label>Start Time</label><br />
-                    <input onChange={(event) => this.handleChange('startTime', event)}></input><br />
+                    <input value={this.state.eventToEdit.startTime} onChange={(event) => this.handleChange('startTime', event)}></input><br />
                     <label>End Time</label><br />
-                    <input onChange={(event) => this.handleChange('endTime', event)}></input>
-                    <button type='submit'>Submit</button>
+                    <input value={this.state.eventToEdit.endTime} onChange={(event) => this.handleChange('endTime', event)}></input><br />
+                    <button type='submit'>UpdateEvent</button>
+                    <button className='delete' onClick={this.deleteEvent}>Delete Event</button>
                 </form>
-                <br/><br/><br/><br/>
-            <p>{JSON.stringify(this.props.match.params)}</p>
+                <br /><br /><br /><br />
+                <p>{JSON.stringify(this.props.match.params)}</p>
             </div>
         )
     };
