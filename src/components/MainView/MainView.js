@@ -26,7 +26,7 @@ class MainView extends Component {
     <LogOutButton className="log-in" />
     <Link
               to="/addevent"
-            >Add Event </Link>
+            ><button>Add Event</button></Link>
   </div>
     )};
 };

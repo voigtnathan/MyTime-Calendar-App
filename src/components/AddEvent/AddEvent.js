@@ -30,6 +30,7 @@ class AddEvent extends Component {
         event.preventDefault();
         console.log(this.state.eventToAdd);
         this.props.dispatch({type: 'ADD_NEW_EVENT', payload: this.state.eventToAdd});
+        this.props.history.push('/');
     }
 
     render() {
