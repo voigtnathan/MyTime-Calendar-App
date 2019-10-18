@@ -1,4 +1,4 @@
-const eventReducer = (state = [], action) => {
+const eventsReducer = (state = [], action) => {
     switch(action.type) {
         case 'SET_TODAYS_EVENTS':
             return action.payload;
@@ -7,4 +7,4 @@ const eventReducer = (state = [], action) => {
     }
 }
 
-export default eventReducer;
+export default eventsReducer;
