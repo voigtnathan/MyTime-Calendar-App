@@ -7,7 +7,12 @@ import {Link} from 'react-router-dom'
 
 class MainView extends Component {
   weekdayshort = moment.weekdaysShort();
-  
+
+  componentDidUpdate(preProps) {
+    if (this.props.reduxStore.events.length !== preProps.reduxStore.events.length) {
+      this.props.dispatch({type:'FETCH_EVENTS'});
+    }
+  }
   render(){
     return (
   
@@ -19,9 +24,7 @@ class MainView extends Component {
       {/* )
       })} */}
     <LogOutButton className="log-in" />
-    <Link
-              to="/addevent"
-            ><button>Add Event</button></Link>
+    <Link to="/addevent"><button>Add Event</button></Link>
   </div>
     )};
 };

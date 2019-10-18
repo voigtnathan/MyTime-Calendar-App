@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/event/:id', (req,res) =>{
+router.get('/event/:id', (req,res) => {
     const queryText = `SELECT * FROM user_calendar_react WHERE id=$1`;
     pool.query(queryText, [req.params.id])
     .then((result) =>{
@@ -22,6 +22,13 @@ router.get('/event/:id', (req,res) =>{
         res.send(result.rows);
     }).catch((error) =>{
         console.log(`error getting this event ${error}`);
+    })
+})
+router.delete('/event/:id', (req,res) => {
+    const queryText = `DELETE FROM user_calendar_react WHERE id=$1`
+    pool.query(queryText, [req.params.id])
+    .then(() =>{
+        res.sendStatus(200);
     })
 })
 

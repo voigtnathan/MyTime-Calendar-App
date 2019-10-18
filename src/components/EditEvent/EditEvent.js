@@ -51,6 +51,10 @@ class EditEvent extends Component {
         console.log(this.state.eventToEdit);
 
     }
+    deleteEvent = () => {
+        this.props.dispatch({type: 'DELETE_EVENT', payload: this.props.match.params.id});
+        this.props.history.push('/');
+    }
 
     render() {
         return (

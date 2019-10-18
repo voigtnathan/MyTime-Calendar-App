@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import moment from 'moment';
 import './DayCard.css'
+import '../App/App.css'
 class DayCard extends Component {
   state = {
     dateObject : moment()
@@ -10,6 +11,11 @@ class DayCard extends Component {
   componentDidMount(){
     this.props.dispatch({type:'FETCH_EVENTS'});
   }
+  componentDidUpdate(preProps) {
+    if (this.props.reduxStore.events.length !== preProps.reduxStore.events.length) {
+      this.props.dispatch({type:'FETCH_EVENTS'});
+    }
+}
   
   render(){
     return(
@@ -19,7 +25,7 @@ class DayCard extends Component {
     <h3>{this.props.reduxStore.events.event_date}</h3>
      {this.props.reduxStore.events.map((event, id) => {
       return(
-        <button key={id}onClick={() => this.props.history.push(`/event/${event.id}`)}>{event.event_title} on {event.event_date}</button>
+        <button className='log-in' key={id}onClick={() => this.props.history.push(`/event/${event.id}`)}>{event.event_title} on {event.event_date}</button>
       )
       })}
      
