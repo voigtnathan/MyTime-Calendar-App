@@ -5,9 +5,7 @@ import moment from 'moment';
 import './DayCard.css'
 import '../App/App.css'
 class DayCard extends Component {
-  state = {
-    dateObject : moment()
-  }
+  
   componentDidMount(){
     this.props.dispatch({type:'FETCH_EVENTS'});
   }

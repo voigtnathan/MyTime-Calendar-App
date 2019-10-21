@@ -1,11 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-
+const moment = require('moment');
 
 router.get('/', (req, res) => {
-    let queryText = `SELECT * FROM user_calendar_react WHERE event_date = '01/31/2019'`;
-    pool.query(queryText)
+    let todaysDate = moment().format('MM/DD/YYYY'); //get today's date and set it to a format the database will be able to work with
+    console.log('request body', todaysDate)
+    let queryText = `SELECT * FROM user_calendar_react WHERE event_date = $1`;
+    pool.query(queryText, [todaysDate])
     .then((result) => {
         console.log(result.rows)
         res.send(result.rows)
