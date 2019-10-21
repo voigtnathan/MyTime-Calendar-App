@@ -42,11 +42,22 @@ import { put, takeLatest } from 'redux-saga/effects';
     }
   }
   
+  function* updateEvent(action) {
+    try {
+      const response = yield axios.put(`/api/events/event/${action.payload.id}`,action.payload);
+      console.log(response);
+      this.fetchEvents();
+    }catch(error) {
+      console.log(`error updating event ${error}`)
+    }
+  }
+  
   function* eventSaga() {
     yield takeLatest('FETCH_EVENTS', fetchEvents);
     yield takeLatest('ADD_NEW_EVENT', addEvent);
     yield takeLatest('GET_EVENT_BY_ID', getEventInfo);
     yield takeLatest('DELETE_EVENT', deleteEvent);
+    yield takeLatest('UPDATE_EVENT', updateEvent);
   }
   
   export default eventSaga;

@@ -32,6 +32,28 @@ router.delete('/event/:id', (req,res) => {
     })
 })
 
+router.put('/event/:id', (req, res) => {
+    let eventToAdd = req.body;
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', req.body);
+    let queryText = 
+    `UPDATE user_calendar_react SET user_id = $1 , event_title = $2, event_description = $3, event_location = $4, event_date = $5, start_time = $6, end_time = $7 WHERE id=$8`;
+    pool.query(queryText, 
+    [   
+        eventToAdd.userId, 
+        eventToAdd.title, 
+        eventToAdd.description, 
+        eventToAdd.location, 
+        eventToAdd.date, 
+        eventToAdd.startTime, 
+        eventToAdd.endTime,
+        req.params.id ])
+        .then((response) =>{
+            console.log(response);
+        }).catch((error) =>{
+            console.log(`error posting new event ${error}`);
+        })
+
+});
 
 router.post('/', (req, res) => {
     let eventToAdd = req.body;

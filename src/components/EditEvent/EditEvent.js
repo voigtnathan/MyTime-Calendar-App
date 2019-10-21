@@ -25,6 +25,8 @@ class EditEvent extends Component {
         this.props.reduxStore.singleEvent.forEach(event => {
             this.setState({
                 eventToEdit: {
+                    id: this.props.match.params.id,
+                    userId: this.props.reduxStore.user.id,
                     title: event.event_title,
                     location: event.event_location,
                     description: event.event_description,
@@ -38,7 +40,8 @@ class EditEvent extends Component {
     }
 
     handleChange = (propertyName, event) => {
-        console.log(this.state.eventToEdit);
+        event.preventDefault();
+        //console.log(this.state.eventToEdit);
         this.setState({
             eventToEdit: {
                 ...this.state.eventToEdit,
@@ -49,6 +52,8 @@ class EditEvent extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         console.log(this.state.eventToEdit);
+        this.props.dispatch({type: 'UPDATE_EVENT', payload: this.state.eventToEdit});
+        this.props.history.push('/');
 
     }
     deleteEvent = () => {
@@ -62,17 +67,17 @@ class EditEvent extends Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <label>Title</label><br />
-                    <input value={this.state.eventToEdit.title} onChange={(event) => this.handleChange('title', event)}></input><br />
+                    <input defaultValue={this.state.eventToEdit.title} onChange={(event) => this.handleChange('title', event)}></input><br />
                     <label>Location</label><br />
-                    <input value={this.state.eventToEdit.location} onChange={(event) => this.handleChange('location', event)}></input><br />
+                    <input defaultValue={this.state.eventToEdit.location} onChange={(event) => this.handleChange('location', event)}></input><br />
                     <label>Description</label><br />
-                    <textarea value={this.state.eventToEdit.description} onChange={(event) => this.handleChange('description', event)}></textarea><br />
+                    <textarea defaultValue={this.state.eventToEdit.description} onChange={(event) => this.handleChange('description', event)}></textarea><br />
                     <label>Date mm/dd/yyyy</label><br />
-                    <input value={this.state.eventToEdit.date} onChange={(event) => this.handleChange('date', event)}></input><br />
+                    <input defaultValue={this.state.eventToEdit.date} onChange={(event) => this.handleChange('date', event)}></input><br />
                     <label>Start Time</label><br />
-                    <input value={this.state.eventToEdit.startTime} onChange={(event) => this.handleChange('startTime', event)}></input><br />
+                    <input defaultValue={this.state.eventToEdit.startTime} onChange={(event) => this.handleChange('startTime', event)}></input><br />
                     <label>End Time</label><br />
-                    <input value={this.state.eventToEdit.endTime} onChange={(event) => this.handleChange('endTime', event)}></input><br />
+                    <input defaultValue={this.state.eventToEdit.endTime} onChange={(event) => this.handleChange('endTime', event)}></input><br />
                     <button type='submit'>UpdateEvent</button>
                     <button className='delete' onClick={this.deleteEvent}>Delete Event</button>
                 </form>
