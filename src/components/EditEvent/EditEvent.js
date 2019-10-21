@@ -78,7 +78,7 @@ class EditEvent extends Component {
                     <input defaultValue={this.state.eventToEdit.startTime} onChange={(event) => this.handleChange('startTime', event)}></input><br />
                     <label>End Time</label><br />
                     <input defaultValue={this.state.eventToEdit.endTime} onChange={(event) => this.handleChange('endTime', event)}></input><br />
-                    <button type='submit'>UpdateEvent</button>
+                    <button className='submit' type='submit'>UpdateEvent</button>
                     <button className='delete' onClick={this.deleteEvent}>Delete Event</button>
                 </form>
                 <br /><br /><br /><br />
