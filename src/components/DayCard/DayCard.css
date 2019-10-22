@@ -1,7 +1,7 @@
 .day-card{
-    width: 50%;
-    height: 70%;
-    border: 1px solid black;
+    width: 70%;
+    height: 95%;
+    border: 3px solid black;
 }
 
 .delete {
@@ -21,4 +21,7 @@
     min-width: 100px;
     outline:0;
     cursor: pointer;
+}
+li {
+    list-style: none;
 }

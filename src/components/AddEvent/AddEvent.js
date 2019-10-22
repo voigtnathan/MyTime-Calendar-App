@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
+import '../DayCard/DayCard.css'
 class AddEvent extends Component {
     state = {
         eventToAdd: {
@@ -50,10 +50,8 @@ class AddEvent extends Component {
                     <input onChange={(event) => this.handleChange('startTime', event)}></input><br />
                     <label>End Time</label><br />
                     <input onChange={(event) => this.handleChange('endTime', event)}></input>
-                    <button type='submit'>Submit</button>
+                    <button className='submit' type='submit'>Submit</button>
                 </form>
-                <br/><br/><br/><br/>
-            <p>{JSON.stringify(this.props.reduxStore.events)}</p>
             </div>
         )
     };

@@ -21,12 +21,13 @@ class DayCard extends Component {
   <div className="day-card">
     <h2>Today</h2>
     <h3>{this.props.reduxStore.events.event_date}</h3>
+    <ul>
      {this.props.reduxStore.events.map((event, id) => {
       return(
-        <button className='log-in' key={id}onClick={() => this.props.history.push(`/event/${event.id}`)}>{event.event_title} on {event.event_date}</button>
+       <li><button className='log-in' key={id}onClick={() => this.props.history.push(`/event/${event.id}`)}>{event.event_title} on {event.event_date} @ {event.start_time} to {event.end_time} notes: {event.event_description}</button></li>
       )
       })}
-     
+     </ul>
     
   </div>
     )};
