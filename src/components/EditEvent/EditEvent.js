@@ -81,8 +81,8 @@ class EditEvent extends Component {
                     <button className='submit' type='submit'>UpdateEvent</button>
                     <button className='delete' onClick={this.deleteEvent}>Delete Event</button>
                 </form>
-                <br /><br /><br /><br />
-                <p>{JSON.stringify(this.props.match.params)}</p>
+                
+                
             </div>
         )
     };
