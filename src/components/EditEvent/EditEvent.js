@@ -21,6 +21,7 @@ class EditEvent extends Component {
             this.setEventToEdit();
         }
     }
+    
     setEventToEdit = () => {
         this.props.reduxStore.singleEvent.forEach(event => {
             this.setState({

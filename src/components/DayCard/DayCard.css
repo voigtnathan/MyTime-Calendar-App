@@ -1,8 +1,26 @@
-.day-card{
-    width: 70%;
-    height: 95%;
+Card {
+    height: 100%;
     border: 3px solid black;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    display: inline-block;
+
 }
+i {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  .right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  
+  .left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+  }  
 
 .delete {
     background-color: red;
