@@ -2,7 +2,9 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
 }
-
+.card {
+    display: inline-block;
+}
 .alert {
     background-color: #ff4545;
     margin: 50px;
@@ -10,9 +12,10 @@ body {
 
 form {
     background-color: #dbd5d5;
-    width: 30%;
+    width: auto;
     height: auto;
-    margin: 20px auto;
+    margin-left: 20px;
+    margin-right: 20px;
     padding: 25px;
     border-radius: 2px;
 }
@@ -26,10 +29,16 @@ input {
   background-color: #00acb0;
   border-radius: 4px;
   color: #f8f8f8;
-  min-height: 50px;
-  min-width: 100px;
+  min-height: 60px;
+  width: 100%;
   outline:0;
   cursor: pointer;
+}
+Card {
+    border: 3px solid black;
+    margin-left: 5vw;
+    margin-right: 5vw;
+
 }
 
 .log-in:hover, .log-out:hover, .register:hover {

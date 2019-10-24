@@ -3,11 +3,17 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const moment = require('moment');
 
-router.get('/', (req, res) => {
-    let todaysDate = moment().format('MM/DD/YYYY'); //get today's date and set it to a format the database will be able to work with
-    console.log('request body', todaysDate)
+router.get('/:date', (req, res) => {
+    // let todaysDate = moment().format('MM/DD/YYYY'); //get today's date and set it to a format the database will be able to work with
+    console.log('request params', req.params)
+    let date = req.params.date
+    console.log('date',date)
+    let placeholder = date.valueOf();
+    console.log('placeholder',placeholder);
+    let formattedDate = moment(placeholder).format('MM/DD/YYYY')
+    console.log('newly formatted date',formattedDate)
     let queryText = `SELECT * FROM user_calendar_react WHERE event_date = $1`;
-    pool.query(queryText, [todaysDate])
+    pool.query(queryText, [formattedDate])
     .then((result) => {
         console.log(result.rows)
         res.send(result.rows)
@@ -36,7 +42,7 @@ router.delete('/event/:id', (req,res) => {
 
 router.put('/event/:id', (req, res) => {
     let eventToAdd = req.body;
-    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', req.body);
+    
     let queryText = 
     `UPDATE user_calendar_react SET user_id = $1 , event_title = $2, event_description = $3, event_location = $4, event_date = $5, start_time = $6, end_time = $7 WHERE id=$8`;
     pool.query(queryText, 

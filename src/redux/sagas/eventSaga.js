@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-  function* fetchEvents() {
+  function* fetchEvents(action) {
     try {
-      const response = yield axios.get('/api/events');
+      const response = yield axios.get(`/api/events/${action.payload}`);
       console.log(response.data)
       yield put({ type: 'SET_TODAYS_EVENTS', payload: response.data });
 
