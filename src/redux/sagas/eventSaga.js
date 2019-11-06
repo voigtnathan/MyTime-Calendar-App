@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
+
   function* fetchEvents(action) {
     try {
-      const response = yield axios.get(`/api/events/${action.payload}`);
+      let date = action.payload.date
+      const response = yield axios.get(`/api/events/${action.payload.id}/${date}`);
       console.log(response.data)
       yield put({ type: 'SET_TODAYS_EVENTS', payload: response.data });
 
@@ -16,6 +18,7 @@ import { put, takeLatest } from 'redux-saga/effects';
     try{
 
         const response = yield axios.get(`/api/events/event/${action.payload}`);
+        console.log(response.data)
         yield put({type: 'SET_EVENT', payload: response.data});
     }catch(error){
         console.log('failed to grab single event', error);

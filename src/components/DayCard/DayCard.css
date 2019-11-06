@@ -1,10 +1,14 @@
 Card {
     height: 100%;
     border: 3px solid black;
-    margin-left: 5vw;
-    margin-right: 5vw;
-    display: inline-block;
 
+}
+.card{
+    margin-left: 2.5vw;
+    margin-right: auto;
+}
+ul {
+  text-align: center !important;
 }
 i {
     border: solid black;
@@ -22,6 +26,19 @@ i {
     -webkit-transform: rotate(135deg);
   }  
 
+.event {
+  /* : left !important; */
+  margin-left: 0em !important;
+  margin-right: auto;
+  color: #f8f8f8;
+  background-color: #9775aa;
+  min-height: 60px;
+  min-width: 100%;
+  text-align: center !important;
+  padding: 10px 10px;
+  text-decoration: none;
+  font-size: 15px;
+}
 .delete {
     background-color: red;
     border-radius: 4px;
@@ -32,7 +49,7 @@ i {
     cursor: pointer;
 }
 .submit {
-    background-color: #00acb0;
+    background-color: #9775aa;
     border-radius: 4px;
     color: #f8f8f8;
     min-height: 50px;

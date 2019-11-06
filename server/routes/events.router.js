@@ -2,27 +2,12 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const moment = require('moment');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-router.get('/:date', (req, res) => {
-    // let todaysDate = moment().format('MM/DD/YYYY'); //get today's date and set it to a format the database will be able to work with
-    console.log('request params', req.params)
-    let date = req.params.date
-    console.log('date',date)
-    let placeholder = date.valueOf();
-    console.log('placeholder',placeholder);
-    let formattedDate = moment(placeholder).format('MM/DD/YYYY')
-    console.log('newly formatted date',formattedDate)
-    let queryText = `SELECT * FROM user_calendar_react WHERE event_date = $1`;
-    pool.query(queryText, [formattedDate])
-    .then((result) => {
-        console.log(result.rows)
-        res.send(result.rows)
-    }).catch((error) =>{
-        console.log(`error in get request ${error}`);
-    })
-});
 
-router.get('/event/:id', (req,res) => {
+
+
+router.get('/event/:id', rejectUnauthenticated, (req,res) => {
     const queryText = `SELECT * FROM user_calendar_react WHERE id=$1`;
     pool.query(queryText, [req.params.id])
     .then((result) =>{
@@ -32,7 +17,27 @@ router.get('/event/:id', (req,res) => {
         console.log(`error getting this event ${error}`);
     })
 })
-router.delete('/event/:id', (req,res) => {
+router.get('/:id/:date', rejectUnauthenticated, (req, res) => {
+    // let todaysDate = moment().format('MM/DD/YYYY'); //get today's date and set it to a format the database will be able to work with
+    console.log('request params', req.params)
+    let date = req.params.date;
+    let id = req.params.id;
+    console.log('user id = ', req.params.id)
+    console.log('date',date)
+    let placeholder = date.valueOf();
+    console.log('placeholder',placeholder);
+    let formattedDate = moment(placeholder).format('MM/DD/YYYY')
+    console.log('newly formatted date',formattedDate)
+    let queryText = `SELECT * FROM user_calendar_react WHERE event_date = $1 AND user_id = $2 ORDER BY start_time ASC`;
+    pool.query(queryText, [formattedDate, id])
+    .then((result) => {
+        console.log(result.rows)
+        res.send(result.rows)
+    }).catch((error) =>{
+        console.log(`error in get request ${error}`);
+    })
+});
+router.delete('/event/:id', rejectUnauthenticated, (req,res) => {
     const queryText = `DELETE FROM user_calendar_react WHERE id=$1`
     pool.query(queryText, [req.params.id])
     .then(() =>{
@@ -40,7 +45,7 @@ router.delete('/event/:id', (req,res) => {
     })
 })
 
-router.put('/event/:id', (req, res) => {
+router.put('/event/:id', rejectUnauthenticated,(req, res) => {
     let eventToAdd = req.body;
     
     let queryText = 
@@ -63,7 +68,7 @@ router.put('/event/:id', (req, res) => {
 
 });
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated,(req, res) => {
     let eventToAdd = req.body;
 let queryText = 
 `INSERT INTO user_calendar_react ("user_id","event_title","event_description","event_location","event_date", "start_time","end_time")

@@ -2,6 +2,13 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
 }
+ul {
+    justify-content: center;
+    text-align: center;
+}
+li{
+    width:100%;
+}
 .card {
     display: inline-block;
 }
@@ -19,14 +26,16 @@ form {
     padding: 25px;
     border-radius: 2px;
 }
-
+a:hover{
+    color: #260339;
+}
 input {
     margin: 5px;
     margin-bottom: 10px;
 }
 
 .log-in, .log-out, .register {
-  background-color: #00acb0;
+  background-color: #9775aa;
   border-radius: 4px;
   color: #f8f8f8;
   min-height: 60px;
@@ -41,8 +50,9 @@ Card {
 
 }
 
+
 .log-in:hover, .log-out:hover, .register:hover {
-  background-color: #008183;
+  background-color: #9775bb;
 }
 
 /* This line makes the "Register" and "Login" buttons look like links */
@@ -53,6 +63,6 @@ Card {
     padding:0;
     font: inherit;
     outline:0;
-    border-bottom:1px solid #444; 
+    border-bottom:1px solid #5e499b; 
     cursor: pointer;
 }

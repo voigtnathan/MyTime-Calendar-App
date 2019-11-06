@@ -24,8 +24,22 @@ function* fetchUser() {
   }
 }
 
+function* getUsers() {
+  try {
+    // const config = {
+    //   headers: { 'Content-Type': 'application/json' },
+    //   withCredentials: true,
+    // };
+
+    const response = yield axios.get('/api/user/userslist');
+    yield put({ type: 'SET_USERS', payload: response.data })
+  } catch (error) {
+    console.log('error getting user list', error);
+  }
+}
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('FETCH_USERS', getUsers);
 }
 
 export default userSaga;
