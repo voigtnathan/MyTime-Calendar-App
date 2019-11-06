@@ -16,6 +16,7 @@ import MainView from '../MainView/MainView';
 import './App.css';
 import AddEvent from '../AddEvent/AddEvent';
 import EditEvent from '../EditEvent/EditEvent';
+import Admin from '../Admin/Admin'
 
 class App extends Component {
   componentDidMount () {
@@ -55,6 +56,11 @@ class App extends Component {
               exact
               path="/event/:id"
               component={EditEvent}
+              />
+              <ProtectedRoute
+              exact
+              path="/admin"
+              component={Admin}
               />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

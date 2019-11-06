@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 class EditEvent extends Component {
     state = {
         eventToEdit: {
@@ -54,11 +55,16 @@ class EditEvent extends Component {
         event.preventDefault();
         console.log(this.state.eventToEdit);
         this.props.dispatch({type: 'UPDATE_EVENT', payload: this.state.eventToEdit});
+        let todaysDate = moment().toISOString(); //get today's date and set it to a format the database will be able to work with
+        this.props.dispatch({type:'FETCH_EVENTS', payload: {date: todaysDate, id: this.props.reduxStore.user.id}});
+      
         this.props.history.push('/');
 
     }
     deleteEvent = () => {
         this.props.dispatch({type: 'DELETE_EVENT', payload: this.props.match.params.id});
+        let todaysDate = moment().toISOString(); //get today's date and set it to a format the database will be able to work with
+        this.props.dispatch({type:'FETCH_EVENTS', payload: {date: todaysDate, id: this.props.reduxStore.user.id}});    
         this.props.history.push('/');
     }
 
